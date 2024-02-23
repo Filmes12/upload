@@ -25,7 +25,7 @@ let websocket;
 const createMessageSelfElement = (content) => {
     const div = document.createElement("div");
 
-    div.classList.add("message--self");
+    div.classList.add("message--self", "message--own");
     div.innerHTML = content;
 
     return div;
@@ -35,7 +35,7 @@ const createMessageOtherElement = (content, sender, senderColor) => {
     const div = document.createElement("div");
     const span = document.createElement("span");
 
-    div.classList.add("message--other");
+    div.classList.add("message--other", "message--other-user");
 
     span.classList.add("message--sender");
     span.style.color = senderColor;
@@ -70,7 +70,7 @@ const processMessage = ({ data }) => {
 
     const isCurrentUser = userId === user.id;
 
-    const message = createMessageOtherElement(content, userName, userColor);
+    const message = isCurrentUser ? createMessageSelfElement(content) : createMessageOtherElement(content, userName, userColor);
 
     chatMessages.appendChild(message);
 
