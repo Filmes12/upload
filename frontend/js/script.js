@@ -92,7 +92,7 @@ const handleLogin = (event) => {
     login.style.display = "none";
     chat.style.display = "flex";
 
-    websocket = new WebSocket("ws://upload-ghosthszz.onrender.com");
+    websocket = new WebSocket("ws://upload-frontend-xmij.onrender.com");
     websocket.onmessage = processMessage;
     websocket.onopen = () => {
         console.log("Conexão WebSocket estabelecida com sucesso.");
