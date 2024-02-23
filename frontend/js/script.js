@@ -25,7 +25,7 @@ let websocket;
 const createMessageSelfElement = (content) => {
     const div = document.createElement("div");
 
-    div.classList.add("message--self", "message--own");
+    div.classList.add("message--self");
     div.innerHTML = content;
 
     return div;
@@ -35,7 +35,7 @@ const createMessageOtherElement = (content, sender, senderColor) => {
     const div = document.createElement("div");
     const span = document.createElement("span");
 
-    div.classList.add("message--other", "message--other-user");
+    div.classList.add("message--other");
 
     span.classList.add("message--sender");
     span.style.color = senderColor;
@@ -70,7 +70,7 @@ const processMessage = ({ data }) => {
 
     const isCurrentUser = userId === user.id;
 
-    const message = isCurrentUser ? createMessageSelfElement(content) : createMessageOtherElement(content, userName, userColor);
+    const message = createMessageOtherElement(content, userName, userColor);
 
     chatMessages.appendChild(message);
 
@@ -92,7 +92,7 @@ const handleLogin = (event) => {
     login.style.display = "none";
     chat.style.display = "flex";
 
-    websocket = new WebSocket("ws://upload-ghosthszz.onrender.com");
+    websocket = new WebSocket("ws://localhost:8080");
     websocket.onmessage = processMessage;
     websocket.onopen = () => {
         console.log("Conexão WebSocket estabelecida com sucesso.");
